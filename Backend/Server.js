@@ -6,19 +6,16 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// ✅ Added CORS with frontend URI
 app.use(
   cors({
-    origin: [
-      "ai-chatbot-git-main-dhruvil234s-projects.vercel.app",
-      "ai-chatbot-cc8qv7ke2-dhruvil234s-projects.vercel.app",
-    ],
-    methods: ["GET", "POST"],
+    origin: "https://ai-chatbot-cc8qv7ke2-dhruvil234s-projects.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
+app.options("*", cors());
 app.use(express.json());
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
