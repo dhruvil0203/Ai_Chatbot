@@ -11,9 +11,10 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // Local development
-      "https://ai-chatbot-amber-rho.vercel.app/", // Deployed frontend
+      "https://ai-chatbot-amber-rho.vercel.app", // Deployed frontend
     ],
     methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
