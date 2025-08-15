@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 4000;
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // Local development
+      "http://localhost:3000", // Local development
       "https://ai-chatbot-amber-rho.vercel.app/", // Deployed frontend
     ],
     methods: ["GET", "POST"],
