@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 4000;
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // Local development
-      "https://ai-chatbot-amber-rho.vercel.app", // Deployed frontend
+      "ai-chatbot-git-main-dhruvil234s-projects.vercel.app",
+      "ai-chatbot-cc8qv7ke2-dhruvil234s-projects.vercel.app",
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
