@@ -8,6 +8,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   useEffect(() => {}, [reply]);
 
   async function sendPrompt() {
@@ -18,7 +20,7 @@ export default function App() {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/ask", { prompt });
+      const res = await axios.post(API_URL, { prompt });
       setReply(res.data.reply || "No reply received");
     } catch (err) {
       console.error(err);

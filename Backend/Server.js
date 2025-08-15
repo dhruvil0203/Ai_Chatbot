@@ -5,7 +5,19 @@ import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-app.use(cors());
+
+// ✅ Added CORS with frontend URI
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // Local development
+      "https://ai-chatbot-amber-rho.vercel.app/", // Deployed frontend
+    ],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
