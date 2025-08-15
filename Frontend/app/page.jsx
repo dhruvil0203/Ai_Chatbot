@@ -9,6 +9,7 @@ export default function App() {
   const [error, setError] = useState("");
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  console.log(API_URL);
 
   useEffect(() => {}, [reply]);
 
