@@ -6,9 +6,14 @@ import cors from "cors";
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+const allowedOrigins = [
+  "https://ai-chatbot-git-main-dhruvil234s-projects.vercel.app",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin: "https://ai-chatbot-git-main-dhruvil234s-projects.vercel.app",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
