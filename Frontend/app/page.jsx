@@ -1,17 +1,28 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { PiCopySimpleLight } from "react-icons/pi";
+import { PiCopySimpleFill } from "react-icons/pi";
+import { FaRegCopy } from "react-icons/fa";
+import { FaCopy } from "react-icons/fa";
 
 export default function App() {
   const [prompt, setPrompt] = useState("");
   const [reply, setReply] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [copy, SetCopy] = useState(false);
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   console.log(API_URL);
 
   useEffect(() => {}, [reply]);
+
+  const handleCopy = () => {
+    const text = document.getElementById("result").innerText;
+    navigator.clipboard.writeText(text);
+    SetCopy(true);
+  };
 
   async function sendPrompt() {
     if (prompt.trim() == "") alert("Ask something..");
@@ -59,8 +70,14 @@ export default function App() {
       )}
 
       {reply && !loading && (
-        <div className="mt-8 p-6 rounded-3xl shadow-2xl max-w-lg w-full whitespace-pre-wrap bg-gray-900/40 border border-gray-700 text-gray-300 text-lg backdrop-blur-sm">
-          <p>{reply.replace(/\*+/g, "")}</p>
+        <div className="mt-8 mb-6 p-6 pt-12 rounded-3xl shadow-2xl max-w-lvw w-full whitespace-pre-wrap bg-gray-900/40 border border-gray-700 text-gray-300 text-lg backdrop-blur-sm relative">
+          <button
+            className="absolute top-5 right-7 text-gray-400 hover:cursor-pointer"
+            onClick={handleCopy}
+          >
+            {copy ? <FaCopy /> : <FaRegCopy />}
+          </button>
+          <p id="result">{reply.replace(/\*+/g, "")}</p>
         </div>
       )}
     </div>
