@@ -30,6 +30,7 @@ export default function App() {
     setLoading(true);
     setReply("");
     setError("");
+    setPrompt("");
 
     try {
       const res = await axios.post(API_URL, { prompt });
