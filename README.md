@@ -1,7 +1,6 @@
 MindSpark 🤖
 
-MindSpark
- is an AI-powered chatbot built with Next.js and Gemini AI, deployed on Vercel with a serverless backend and frontend.
+MindSpark is an AI-powered chatbot built with Next.js and Gemini AI, deployed on Vercel with a serverless backend and frontend.
 
 🚀 Features
 
