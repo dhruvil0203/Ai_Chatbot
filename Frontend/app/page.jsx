@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { PiCopySimpleLight } from "react-icons/pi";
-import { PiCopySimpleFill } from "react-icons/pi";
+
 import { FaRegCopy } from "react-icons/fa";
 import { FaCopy } from "react-icons/fa";
 
