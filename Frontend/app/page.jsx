@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import { FaRegCopy } from "react-icons/fa";
 import { FaCopy } from "react-icons/fa";
 
-export default function App() {
+export default function ChatPage() {
   const [prompt, setPrompt] = useState("");
   const [reply, setReply] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,6 +13,16 @@ export default function App() {
 
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   console.log(API_URL);
+
+  // Service Worker Registration
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((reg) => console.log("✅ Service Worker registered"))
+        .catch((err) => console.log("❌ SW registration failed:", err));
+    }
+  }, []);
 
   useEffect(() => {}, [reply]);
 
