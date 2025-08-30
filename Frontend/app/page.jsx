@@ -6,6 +6,7 @@ import { FaCopy } from "react-icons/fa";
 
 export default function ChatPage() {
   const [prompt, setPrompt] = useState("");
+  const [currentPrompt, setCurrentPrompt] = useState("");
   const [reply, setReply] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -32,12 +33,23 @@ export default function ChatPage() {
     SetCopy(true);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendPrompt();
+    }
+  };
+
   async function sendPrompt() {
-    if (prompt.trim() == "") alert("Ask something..");
+    if (prompt.trim() == "") {
+      alert("Ask something..");
+      return;
+    }
 
     setLoading(true);
     setReply("");
     setError("");
+    setCurrentPrompt(prompt);
     setPrompt("");
 
     try {
@@ -53,20 +65,23 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gradient-to-br from-black via-gray-900 to-black font-sans">
-      <h1 className="text-5xl font-extrabold mb-8 text-gray-200 drop-shadow-[0_2px_2px_rgba(255,255,255,0.1)] tracking-wider">
-        Mindspark
+      <h1 className="text-6xl font-black mb-8 tracking-wider animate-pulse">
+        <span className="text-white">Mind</span>
+        <span className="bg-gradient-to-r from-indigo-600 via-blue-500 to-purple-800 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+          spark
+        </span>
       </h1>
-
       <textarea
         className="border border-gray-700 bg-gray-800/40 p-4 w-full max-w-lg rounded-3xl text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/60 shadow-2xl resize-none transition-all duration-300 backdrop-blur-sm"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Ask something..."
         rows={3}
       />
 
       <button
-        className="bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 text-white px-7 py-3 mt-6 rounded-2xl shadow-2xl shadow-indigo-500/20 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-transform transform hover:scale-105 hover:shadow-indigo-500/40 active:scale-95"
+        className="bg-gradient-to-r  from-indigo-600 via-blue-600 to-indigo-700 text-white px-7 py-3 mt-6 rounded-2xl shadow-2xl shadow-indigo-500/20 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-transform transform hover:scale-105 hover:shadow-indigo-500/40 active:scale-95"
         onClick={sendPrompt}
       >
         {loading ? "Loading..." : "Send"}
@@ -86,6 +101,9 @@ export default function ChatPage() {
           >
             {copy ? <FaCopy /> : <FaRegCopy />}
           </button>
+          <p className="font-semibold text-indigo-400 mb-4">
+            Question: {currentPrompt}
+          </p>
           <p id="result">{reply.replace(/\*+/g, "")}</p>
         </div>
       )}
